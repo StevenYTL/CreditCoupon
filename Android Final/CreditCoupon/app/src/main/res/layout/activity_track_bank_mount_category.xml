@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrackActivity_bank_mount_category">
+
+    <TextView
+        android:id="@+id/message_classify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="玉山銀行"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_housing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_classify"
+        android:onClick="click_housing"
+        android:text="Housing" />
+
+    <Button
+        android:id="@+id/btn_onlineshopping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_housing"
+        android:onClick="click_onlineshopping"
+        android:text="Online Shopping" />
+
+    <Button
+        android:id="@+id/btn_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_onlineshopping"
+        android:onClick="click_shopping"
+        android:text="Shopping" />
+
+    <Button
+        android:id="@+id/btn_travel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_shopping"
+        android:onClick="click_travel"
+        android:text="Travel" />
+
+    <Button
+        android:id="@+id/btn_communication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_travel"
+        android:onClick="click_communication"
+        android:text="Communication" />
+
+    <Button
+        android:id="@+id/btn_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_communication"
+        android:onClick="click_medicine"
+        android:text="Medicine" />
+
+    <Button
+        android:id="@+id/btn_food"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_medicine"
+        android:onClick="click_food"
+        android:text="Food" />
+
+    <Button
+        android:id="@+id/btn_transportation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_food"
+        android:onClick="click_transportation"
+        android:text="Transportation" />
+
+    <Button
+        android:id="@+id/btn_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_transportation"
+        android:onClick="click_movie"
+        android:text="Movie" />
+
+    <Button
+        android:id="@+id/btn_others"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_movie"
+        android:onClick="click_others"
+        android:text="Others" />
+
+</RelativeLayout>

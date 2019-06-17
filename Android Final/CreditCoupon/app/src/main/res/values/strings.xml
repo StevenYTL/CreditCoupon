@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CreditCoupon!!</string>
+    <string name="title_main">首頁</string>
+    <string name="title_track">分類</string>
+    <string name="title_my">我的收藏</string>
+    <string name="title_notice">通知</string>
+    <string name="update">update_mount</string>
+    <string name="notification_title">Updating!!!</string>
+    <string name="notification_text">You get new coupons!!</string>
+
+
+</resources>
