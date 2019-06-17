@@ -71,15 +71,15 @@ public class MyActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_main:
-                        Intent intent_main = new Intent(MyActivity.this,MainActivity.class);
+                        Intent intent_main = new Intent(MyActivity.this, MainActivity.class);
                         startActivity(intent_main);
                         break;
                     case R.id.navigation_track:
-                        Intent intent_track = new Intent(MyActivity.this,TrackActivity.class);
+                        Intent intent_track = new Intent(MyActivity.this, TrackActivity.class);
                         startActivity(intent_track);
                         break;
                     case R.id.navigation_notice:
-                        Intent intent_notice = new Intent(MyActivity.this,NoticeActivity.class);
+                        Intent intent_notice = new Intent(MyActivity.this, NoticeActivity.class);
                         startActivity(intent_notice);
                         break;
                     case R.id.navigation_my:
@@ -111,16 +111,17 @@ public class MyActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == EDIT_REQUEST){
-            if (resultCode == RESULT_OK){
+        if (requestCode == EDIT_REQUEST) {
+            if (resultCode == RESULT_OK) {
                 Favor_bank.setText(intent.getCharSequenceExtra("bank"));
                 mname.setText(intent.getCharSequenceExtra("name"));
                 Favor_catrgory.setText(intent.getCharSequenceExtra("favor"));
             }
         }
     }
+
     /**
      * Initialize the image data from resources.
      */
@@ -134,23 +135,24 @@ public class MyActivity extends AppCompatActivity {
         // information about each sport
         for (int i = 0; i < imagesTitle_f.length; i++) {
 //            mImageData.add(new Image(imagesTitle_m[i], imagesContent_m[i],imagesUri_m[i],imagesRecources_m[0]));
-            mImageData_bkfvr.add(new Image(imagesTitle_f[i], imagesContent_f[i],imagesUri_f[i],imagesImguri_f[i]));
-           } //imagesContent[i], imagesUri[i],
+            mImageData_bkfvr.add(new Image(imagesTitle_f[i], imagesContent_f[i], imagesUri_f[i], imagesImguri_f[i]));
+        } //imagesContent[i], imagesUri[i],
 
         // Notify the adapter of the change.
 //        mAdapter.notifyDataSetChanged();
         mAdapter_bkfvr.notifyDataSetChanged();
     }
 
-    class JsonAsyncTask extends AsyncTask<Void,Void,String> {
+    class JsonAsyncTask extends AsyncTask<Void, Void, String> {
         String resStr;
+
         @Override
         protected String doInBackground(Void... voids) {
             Request request = new Request.Builder()
                     .url("http://140.116.96.199:8000/getSaving")
                     .build();
 
-            try{
+            try {
                 Response response = client.newCall(request).execute();
                 resStr = response.body().string();
 
@@ -163,29 +165,35 @@ public class MyActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             try {
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                if (s != null) {
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray jsonArray = jsonObject.getJSONArray("result");
 
-                for(int i=0; i<jsonArray.length(); i++){
-                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject2 = jsonArray.getJSONObject(i);
 
-                    imagesTitle.add(jsonObject2.getString("title"));
-                    imagesContent.add(jsonObject2.getString("discount"));
-                    imagesUri.add(jsonObject2.getString("url"));
-                    images_img.add(jsonObject2.getString("img_url"));
+                        imagesTitle.add(jsonObject2.getString("title"));
+                        imagesContent.add(jsonObject2.getString("discount"));
+                        imagesUri.add(jsonObject2.getString("url"));
+                        images_img.add(jsonObject2.getString("img_url"));
+                    }
+                    imagesTitle_f = imagesTitle.toArray(new String[imagesTitle.size()]);
+                    imagesContent_f = imagesContent.toArray(new String[imagesContent.size()]);
+                    imagesUri_f = imagesUri.toArray(new String[imagesUri.size()]);
+                    imagesImguri_f = images_img.toArray(new String[images_img.size()]);
+                    initializeData();
+                } else {
+                    // null response or Exception occur
                 }
-                imagesTitle_f = imagesTitle.toArray(new String[imagesTitle.size()]);
-                imagesContent_f = imagesContent.toArray(new String[imagesContent.size()]);
-                imagesUri_f = imagesUri.toArray(new String[imagesUri.size()]);
-                imagesImguri_f = images_img.toArray(new String[images_img.size()]);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            initializeData();
 
         }
     }
+
     public void editprofile(View view) {
         Intent intent = new Intent(this, EditProfile.class);
         intent.putExtra("bank", Favor_bank.getText());

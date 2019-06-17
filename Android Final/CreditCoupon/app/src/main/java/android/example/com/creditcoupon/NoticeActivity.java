@@ -288,26 +288,34 @@ public class NoticeActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             try {
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                if(s!=null){
+                    // Do you work here on success
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray jsonArray = jsonObject.getJSONArray("result");
 
-                for(int i=0; i<jsonArray.length(); i++){
-                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+                    for(int i=0; i<jsonArray.length(); i++){
+                        JSONObject jsonObject2 = jsonArray.getJSONObject(i);
 
-                    imagesTitle.add(jsonObject2.getString("title"));
-                    imagesContent.add(jsonObject2.getString("discount"));
-                    imagesUri.add(jsonObject2.getString("url"));
-                    images_img.add(jsonObject2.getString("img_url"));
+                        imagesTitle.add(jsonObject2.getString("title"));
+                        imagesContent.add(jsonObject2.getString("discount"));
+                        imagesUri.add(jsonObject2.getString("url"));
+                        images_img.add(jsonObject2.getString("img_url"));
+                    }
+                    imagesTitle_f = imagesTitle.toArray(new String[imagesTitle.size()]);
+                    imagesContent_f = imagesContent.toArray(new String[imagesContent.size()]);
+                    imagesUri_f = imagesUri.toArray(new String[imagesUri.size()]);
+                    imagesImguri_f = images_img.toArray(new String[images_img.size()]);
+
+                    NoticeData();
+
+                }else{
+                    // null response or Exception occur
                 }
-                imagesTitle_f = imagesTitle.toArray(new String[imagesTitle.size()]);
-                imagesContent_f = imagesContent.toArray(new String[imagesContent.size()]);
-                imagesUri_f = imagesUri.toArray(new String[imagesUri.size()]);
-                imagesImguri_f = images_img.toArray(new String[images_img.size()]);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            NoticeData();
 
         }
     }
